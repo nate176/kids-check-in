@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Your App Name</title>
+    
+    <!-- iOS specific tags (These work here, but not in GAS) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My GAS App">
+    <link rel="apple-touch-icon" href="your-domain.com">
+  
+    <script>
+      const GAS_URL = "script.google.com";
+      
+      // Only redirect if already in standalone mode (installed)
+      // This prevents the redirect from happening while the user is trying to "Add to Home Screen"
+      if (window.navigator.standalone) {
+        window.location.href = GAS_URL;
+      }
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center; padding-top: 50px; font-family: sans-serif;">
+      <h1>My App</h1>
+      <p>To install this app on your iPhone:</p>
+      <p>1. Tap the <strong>Share</strong> button below.</p>
+      <p>2. Select <strong>Add to Home Screen</strong>.</p>
+    </div>
+  </body>
+</html>
