@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Your App Name</title>
-    
-    <!-- iOS specific tags (These work here, but not in GAS) -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="AGC Kids">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <link rel="apple-touch-icon" href="your-domain.com">
-  
-    <script>
-      const GAS_URL = "https://script.google.com/macros/s/AKfycbz5jTLpdf-ckJ4aHvPHsdMSk5fPRWKmWtmJdjF2_HI/dev";
-      
-      // Only redirect if already in standalone mode (installed)
-      // This prevents the redirect from happening while the user is trying to "Add to Home Screen"
-      if (window.navigator.standalone) {
-        window.location.href = GAS_URL;
-      }
-    </script>
-  </head>
-  <body>
-    <div style="text-align: center; padding-top: 50px; font-family: sans-serif;">
-      <h1>My App</h1>
-      <p>To install this app on an iPad:</p>
-      <p>1. Tap the <strong>Share</strong> button below.</p>
-      <p>2. Select <strong>Add to Home Screen</strong>.</p>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>AGC Kids</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%; width: 100%;
+      overflow: hidden; background-color: #000; /* Match your app theme */
+    }
+    iframe {
+      border: none; width: 100%; height: 100%;
+      /* Handle iOS notch/safe area padding here if needed */
+      padding-top: env(safe-area-inset-top);
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // Only show the app if installed; otherwise show install instructions
+    if (window.navigator.standalone) {
+      document.write('<iframe src="script.google.com"></iframe>');
+    } else {
+      document.body.innerHTML = `
+        <div style="color:white; text-align:center; padding:50px; font-family:sans-serif;">
+          <h1>Install AGC Kids</h1>
+          <p>Tap <strong>Share</strong> then <strong>Add to Home Screen</strong></p>
+        </div>`;
+    }
+  </script>
+</body>
 </html>
