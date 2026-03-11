@@ -48,8 +48,8 @@
       iframe.style.height = "100%";
       iframe.style.border = "none";
       container.appendChild(iframe);
-      window.addEventListener("message", (event) => {
-      if (event.data.type === "SAVE_ID") {
+      window.addEventListener("message", (e) => {
+      if (e.data.type === "SAVE_ID") {
         setKioskCookie(e.data.value);
         // Debug
         alert(`Kiosk ID Saved to Cookie: ${e.data.value}`);
