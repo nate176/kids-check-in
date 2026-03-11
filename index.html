@@ -22,18 +22,26 @@
   <div id="app-container" style="height: 100vh;"></div>
 
   <script>
+    const getKioskCookie = () => document.cookie.match(/kioskId=([^;]+)/)?.[1];
+    const setKioskCookie = (id) => {
+      document.cookie = `kioskId=${id}; max-age=315360000; path=/; SameSite=Lax`;
+    };
+
+    const scriptUrl = "https://script.google.com/a/macros/agcthailand.org/s/AKfycbwhgWmR_EDXiKvxYysYZgdEPy2pYI4DU6xXrbW6zCaYd2MCERrlM2sy1i04S5RfxSo4/exec";
+    const savedId = getKioskCookie();
     const container = document.getElementById('app-container');
 
     if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
       const iframe = document.createElement('iframe');
-      iframe.src = "https://script.google.com/a/macros/agcthailand.org/s/AKfycbwhgWmR_EDXiKvxYysYZgdEPy2pYI4DU6xXrbW6zCaYd2MCERrlM2sy1i04S5RfxSo4/exec";
+      iframe.src = savedId ? `${scriptUrl}?kioskId=${savedId}` : scriptUrl;
       iframe.style.width = "100%";
       iframe.style.height = "100%";
       iframe.style.border = "none";
       container.appendChild(iframe);
       window.addEventListener("message", (event) => {
-      if (event.data.type === "SAVE_STRING") {
-        window.location.hash = "data=" + encodeURIComponent(event.data.value);
+      if (event.data.type === "SAVE_ID") {
+        setKioskCookie(e.data.value);
+        console.log("Kiosk ID Saved to Cookie:", e.data.value);
       }
     });
     } else {
