@@ -31,6 +31,12 @@
       iframe.style.height = "100%";
       iframe.style.border = "none";
       container.appendChild(iframe);
+      function saveToUrl(key, value) {
+        const currentHash = window.location.hash.substring(1);
+        const params = new URLSearchParams(currentHash);
+        params.set(key, value);
+        window.location.hash = params.toString();
+      }
     } else {
       container.innerHTML = `
         <div style="color:white; text-align:center; padding:50px; font-family:sans-serif;">
