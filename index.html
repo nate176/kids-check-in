@@ -22,6 +22,16 @@
   <div id="app-container" style="height: 100vh;"></div>
 
   <script>
+      // CATCH ALL ERRORS AND SHOW AS ALERTS
+    window.onerror = function(message, source, lineno, colno, error) {
+      alert(`Error: ${message}\nLine: ${lineno}\nColumn: ${colno}`);
+      return false;
+    };
+  
+    // CATCH PROMISE REJECTIONS (Common in GAS)
+    window.onunhandledrejection = function(event) {
+      alert("Promise Failed: " + event.reason);
+    };
     const getKioskCookie = () => document.cookie.match(/kioskId=([^;]+)/)?.[1];
     const setKioskCookie = (id) => {
       document.cookie = `kioskId=${id}; max-age=315360000; path=/; SameSite=Lax`;
@@ -41,7 +51,8 @@
       window.addEventListener("message", (event) => {
       if (event.data.type === "SAVE_ID") {
         setKioskCookie(e.data.value);
-        console.log("Kiosk ID Saved to Cookie:", e.data.value);
+        // Debug
+        alert(`Kiosk ID Saved to Cookie: ${e.data.value}`);
       }
     });
     } else {
