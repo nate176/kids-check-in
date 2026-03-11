@@ -22,7 +22,8 @@
   <div id="app-container" style="height: 100vh;"></div>
 
   <script>
-      // CATCH ALL ERRORS AND SHOW AS ALERTS
+    alert("Do these even show");
+    
     window.onerror = function(message, source, lineno, colno, error) {
       alert(`Error: ${message}\nLine: ${lineno}\nColumn: ${colno}`);
       return false;
@@ -46,6 +47,7 @@
 
     const scriptUrl = "https://script.google.com/a/macros/agcthailand.org/s/AKfycbwhgWmR_EDXiKvxYysYZgdEPy2pYI4DU6xXrbW6zCaYd2MCERrlM2sy1i04S5RfxSo4/exec";
     const savedId = getKioskCookie();
+    alert("savedId - " + savedId);
     const container = document.getElementById('app-container');
 
     if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
